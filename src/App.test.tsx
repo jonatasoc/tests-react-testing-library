@@ -17,3 +17,19 @@ test("renders learn react link", () => {
 
   expect(screen.getByText(/change to red/i)).toBeVisible();
 });
+
+test("initial conditions", () => {
+  render(<App />);
+
+  const colorButton = screen.getByRole("button", { name: "Change to blue" });
+  const checkBox = screen.getByRole("checkbox");
+
+  expect(colorButton).not.toBeDisabled();
+  expect(checkBox).not.toBeChecked();
+
+  fireEvent.click(checkBox);
+
+  expect(checkBox).toBeChecked();
+
+  expect(colorButton).toBeDisabled();
+});
